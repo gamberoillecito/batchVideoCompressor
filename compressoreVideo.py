@@ -4,43 +4,47 @@ import sys
 import argparse
 import re
 
-# comprime tutti i video nella cartella passata come primo parametro
+
 def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("percorso", help="Specifica il percorso ai video da comprimere")
+    parser.add_argument("path", help="Path to the folder containing the videos to compress")
     parser.add_argument("-d", "--destination", 
-				help="La cartella dove mettere i video compressi")
+				help="The folder where to put the compressed videos. (Equals to path by default)")
     args = parser.parse_args()
 
-    if os.path.isdir(args.percorso):
-            comprimi(args.percorso, args.destination)
+    if os.path.isdir(args.path):
+            compress(args.path, args.destination)
     else:
-        printError("Il percorso non e' una cartella")
+        printError("Unknown error")
     
    
-def comprimi(cartella, destinazione):
-    if destinazione != None:
+def compress(folder, destination):
+    
+    if destination != None:
         try:
-            subprocess.run('mkdir "%s"' %(cartella + '\\' + destinazione), check=True)
+            subprocess.run('mkdir "%s"' %(folder + '\\' + destination), check=True, shell=True)
         except subprocess.CalledProcessError:
-            sys.exit(1)
+            if len(os.listdir(folder + '\\' + destination) ) != 0:
+                sys.exit(1)
         except:
             print('Errorre')
             sys.exit(1)
     else:
-        destinazione = ''
-    for root, dirs, files in os.walk(cartella, topdown=True):
+        destination = ''
+    for root, dirs, files in os.walk(folder, topdown=True):
         for filename in files:
-            if os.path.isfile(cartella + '\\' + filename):
+            if os.path.isfile(folder + '\\' + filename):
                 diviso = re.split("([\d\w_?\-. \(\)]+).(..[\d\w]+)", filename)
-                nuovoNome = cartella + '\\' + destinazione + '\\'
+                nuovoNome = folder + '\\' + destination + '\\'
                 nuovoNome += diviso[1]
                 est = diviso[2]
                 nuovoNome += '_c.'
                 nuovoNome += est
-                # subprocess.run('cp "%s" "%s"' %(cartella + '\\' + filename, nuovoNome), check=True)
-                subprocess.run('ffmpeg -i "%s" -vf scale=-1:720 -c:v libx264 -crf 18 -preset slow  -c:a copy "%s"' %(cartella + '\\' + filename, nuovoNome), check=True)
-            
+                # subprocess.run('cp "%s" "%s"' %(folder + '\\' + filename, nuovoNome), check=True)
+                try:
+                    subprocess.run('ffmpeg -i "%s" -vf scale=-1:720 -c:v libx264 -crf 18 -preset slow  -c:a copy "%s"' %(folder + '\\' + filename, nuovoNome), check=True, shell=True)
+                except subprocess.CalledProcessError:
+                    sys.exit(1)
             
    
    
