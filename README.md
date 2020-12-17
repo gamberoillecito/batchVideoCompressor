@@ -14,7 +14,7 @@ If the folder with you videos is called "folder-with-videos" and has the followi
 
 ```
 .
-└───directory-with-videos
+└───folder-with-videos
         v1.mkv
         v2.mkv
         v3.mkv
@@ -25,7 +25,7 @@ And you use the following command:
 The result will be:
 ```
 .
-└───directory-with-videos
+└───folder-with-videos
     │   v1.mkv
     │   v2.mkv
     │   v3.mkv
