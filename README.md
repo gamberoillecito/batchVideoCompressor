@@ -19,6 +19,7 @@ If the folder with you videos is called "folder-with-videos" and has the followi
         v3.mkv
 ```
 And you use the following command:
+
 `python3 batchVideoCompressor.py "folder-with-videos" -d "compressed-videos"`
 
 The result will be:
