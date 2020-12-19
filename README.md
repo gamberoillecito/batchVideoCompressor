@@ -45,7 +45,7 @@ The result will be:
         v1.mkv
         v2.mkv
         v3.mkv
-C
+C:.
 └───compressed-videos
         v1_c.mkv
         v2_c.mkv
