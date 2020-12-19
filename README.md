@@ -45,7 +45,7 @@ The result will be:
         v1.mkv
         v2.mkv
         v3.mkv
-C:
+C
 └───compressed-videos
         v1_c.mkv
         v2_c.mkv
@@ -54,7 +54,7 @@ C:
 
 ------------------
 
-Using `python3 batchVideoCompressor.py "folder-with-videos" -ad "C:\compressed-videos"`
+Using `python3 batchVideoCompressor.py "folder-with-videos"`
 
 The result will be:
 ```
