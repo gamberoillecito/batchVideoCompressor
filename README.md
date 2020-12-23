@@ -9,7 +9,7 @@ Run the .py or .exe files specifying the `path` to the folder containing the vid
 
 
 Example:
-If the folder with you videos is called "folder-with-videos" and has the following structure:
+If the folder with the videos is called "folder-with-videos" and has the following structure:
 
 ```
 .
